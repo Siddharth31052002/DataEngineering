@@ -1,0 +1,85 @@
+Data Warehouse Fundamentals -  Datawarehouse is a centralized repository which stores data in a **structured** format from multiple sources optimized for analytical processing and reporting. (Subject oriented)    
+
+
+
+Big Data - It refers to extremely large and complex datasets that require advance tools and techniques for storage , processing , analysis. (3V's - Volume,Variety,Velocity)   
+
+
+
+Hadoop - It is a open source framework that enables distributed storage and processing of large datasets across clusters of computers. 
+
+
+
+MapReduce - A programming paradigm used to process the distributed data(HDFS) in parallel.
+
+
+
+HDFS as Data Lake  - Data Storage framework which can store all kinds of data. (schema on read, optimized for batch processing and not for realtime access needs)
+
+
+
+YARN - It is a cluster management technology used in Apache Hadoop to efficiently allocate resources for big data processing.
+
+
+HIVE - It is a datawarehousing tool built on top of Hadoop that enables querying and managing large datasets using HIVEQL , a SQL like language.
+It simplifies complex mapreduce operations.
+ETL mai bhi kaam aata hive.
+External tables are supported by Apache Hive. We can process data without actually storing data in HDFS because of this feature.
+Ad-Hoc queries Hive mai hoti. 
+Hive-Services - Beeline, Metastore, Compiler, Optimizer, Driver 
+partitioning - makes different number of directories , jitney bhi partition tum karoge kisi bhi column ke.(used when there are billions of rows)
+bucketing - It reduces the number of shuffle operations which makes us to query faster and each bucket is stored as a separate file inside the table directory (used when we need to join different tables often , used when a column has high number of unique values , buckets ensure even distribution of data across files)
+
+
+
+Scoop - It refers to a tool used for transferring data between relational databases and Hadoop ecosystems (HDFS,HIVE)
+
+
+
+Spark - It is an open source distributed **computing framework** designed for fast big data processing 
+
+The Spark Driver includes several other components, including a DAG Scheduler, Task Scheduler, Backend Scheduler, and Block Manager, all of which are responsible for translating user-written code into jobs that are actually executed on the cluster. [DONE]
+
+
+PySpark - Its is a Python API for Apache Spark. It allows us to write Spark Applications using python. It is also used to handle real time data streams using Spark Structured Streaming with pyspark. 
+
+
+
+RDD - Fundamental data structure in Apache Spark , which is immutable , fault tolerant collection of elements.
+
+
+
+Spark Cluster - Group of interconnected computers(nodes) that work together to process large scale data using Apache's Spark distributed computing framework.
+
+
+
+Working with Spark Data frames
+
+
+
+Spark Streaming - Real time analysis of data, it allows to check fraud as event happens (e.g banking).
+The streams are divided into batches (micro batching), then each batch is processed using Spark's core engine (RDD/DataFrames) and then the results are pushed to externals systems (databases,files,dashboards)
+
+
+
+Spark Structured Streaming - Scalable fault tolerant stream processing engine built on apache spark sql.
+
+Kafka - Distributed event streaming platform designed for high throughput realtime data processing.
+
+Scala - multiparadigm, functional and object oriented, statically typed 
+
+Airflow
+
+It is a open source platform programmatically , author , schedule and monitor workflows.
+It is a workflow orchestrator
+
+
+Cloud Fundamentals
+
+Azure Fundamentals, Services and Infrastructure
+
+Azure Storage Services
+
+Azure Database Services
+
+Data Pipelines - System that automates the movement and processing of data from one location to another location (Raw data is collected , transformed and stored efficiently)

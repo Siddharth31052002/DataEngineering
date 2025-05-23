@@ -1,0 +1,437 @@
+								   REVISION FOR MILESTONE 3 
+
+
+
+RREMEMBER --> JUST ONE LINERS ARE ENOUGH FOR INTERVIEW, DONT FUCKING CRIBB ABOUT IT , EVEN IF YOU KNOW LENGTHIER ANSWER.
+
+
+
+									   HADOOP 
+
+
+Version of Hadoop which we are using is Hadoop 3.10.1 (just a random answer, check with it once)
+
+Hadoop is a open source distributed storage platform and parallel processing framework.
+Distributed --> The data is sharded into blocks and then is distributed along the cluster.
+Supports massively parallel processing. 
+
+
+The *5 V's of Big Data* are key characteristics that define the nature and challenges of handling large datasets:
+
+1. Volume:
+   - Refers to the massive amount of data generated every second from various sources like social media, IoT devices, and business transactions.
+   - Example: Social media platforms generate billions of posts, images, and videos daily.
+
+2. Velocity:
+   - Represents the speed at which data is created, processed, and analyzed.
+   - Example: Real-time analytics for stock market trends or live sports updates.
+
+3. Variety:
+   - Indicates the diverse formats and types of data, such as structured, semi-structured, and unstructured data.
+   - Example: Text, images, videos, and sensor data from IoT devices.
+
+4. Veracity:
+   - Refers to the accuracy and reliability of data, addressing issues like data quality and trustworthiness.
+   - Example: Filtering out fake news or unreliable sources in social media data.
+
+5. Value:
+   - Highlights the importance of extracting meaningful insights and business value from data.
+   - Example: Using customer data to improve marketing strategies and product development.
+
+
+Flat files and any delimited files are structured data along with CSV's and Excel sheets. 
+
+Semi structured data includes Json and XML (parquet,ORC --> Types for storing file, but lies under semi structured)
+
+Unstructured data includes log files, documents, images, videos.
+
+
+CHARACTERISTICS OF HADOOP 
+
+1.WHY BIG DATA/HADOOP? 
+It is distributed storage where multimode clusters are used and where data is partitioned and distributed across the cluster. 
+client - server arch --> No client server arch in Hadoop
+master-slave arch --> Hadoop supports this architecture.
+
+2.Scalibility 
+Horizontal --> Adding new nodes to cluster at any time.
+Vertical --> Upgrading a single nodes capacity.
+
+3.Fault Tolerance 
+Failure free, because of replication of data into different clusters (basically sharding) 
+
+4.High Availability 
+Available at anytime for n number of users , concurrent user access just because of replication.
+
+5.Low Latency 
+Quick response whenever queried and fast processing. 
+
+6.MPP (massively parallel processing) 
+Distributed datasets are processed simultaneously by multiple nodes. 
+
+
+
+								      DATA WAREHOUSE 
+
+OLTP - ONLINE TRANSACTION PROCESSING - TO RUN BUSINESS 
+
+OLAP - A technology used for high speed complex querying and multidimensional analysis on large volumes of data in data warehouse or data lakes.
+
+ 
+
+There are multiple applications in one business i.e it is heterogenous data sources. (example - school, jisme admin, library,hostel,cafeteria hota)
+
+Different applications se jab sab kuch merge karna hota toh main target hota ki homogenus target ho..matlab har alag application kisi na kisi framework pe bani rehti jo ki jaroori nahi same ho...toh usko same page pe laaya jataa yaani ki Datawarehouse mai.
+
+
+TRANSACTION PROCESSING IS DONE ON "CURRENT" DATA.
+
+
+OLTP                                            VS                         DATA WAREHOUSE
+
+appl/process oriented                                                      Subject Oriented 
+
+holds current data                                                         Holds historical data for analysis (loan), Time Variant
+
+90-180 days                                                                5-10 years 
+
+Heterogenous Data                                                          Homogenous
+
+Isolated                                                                   Integrated (saare alag alag app ek saaath)
+
+Volatile                                                                   Non-volatile
+
+operational source                                                         Staging area
+
+
+
+ODS --> Operational Data Store --> Near real time Datawarehouse , it comes between OLTP and Datawarehouse.
+
+ETL --> Extract , Transform , Load --> ETL tools does the transformation --> Informatica , talend, SSIS, Datastage, Azure Data Factory, usually works on small datasets because large datasets mai slow ho jata transformation ke baad loading.
+
+ELT --> Extract , Load , Transform --> Here, we load the data first into the target system and then database does the transformation (snowflake,azure synapse, big query), isme cloud based datawarehouses hote ya big data platforms..
+
+**DataWarehouse has three Schema's. 
+
+1. Star Schema --> Centralized fact table surrounded by non-normalized dimension tables. 
+
+2. Snowflake --> Dimensions are normalized
+
+3. Hybrid/Constellation Schema
+
+
+
+Fact Table - keys and measure 
+
+Dimension table - descriptive data / context of the measure
+
+--> dimension tables are small 
+--> fact tables are large 
+
+IN DW WE HAVE SEPARATE KEY CALLED AS SURROGATE KEY - SK --> Alternate key in dimension table to maintain the history.
+
+FACT --> The data in fact table is generally transactional.
+
+DIMENSION --> Dimension table contains textual or categorical data, like product names, store locations, and dates.
+
+DIMENSION --> Dimension tables are often de-normalized to make querying simpler.(in star schema)
+
+The fact table tells you how many units were sold (quantity) and how much revenue was earned (revenue) and The dimension tables tell you what product was sold, where it was sold, and when it was sold.
+
+Data Centers have Racks and inside racks there are nodes.
+
+
+SLOWLY CHANGING DIMENSION 
+
+Used to track the historical changes in domains like customer details or product descriptions.
+
+TYPE 1 --> Current data / no history (The old value is overwritten with the new value, losing historical data)
+
+TYPE 2 --> Full History , contains three types, Version, Flag and Begin Date/End Date (flag value keeps getting updated for every new record entered)
+
+TYPE 3 --> Partial History(Previous and current columns) (A new column is added to store previous values)
+
+  
+
+
+					         HDFS  (localhost:9000/user/username) , home directory and / is root directory 
+
+
+Write Once Read Many 
+
+A file in HDFS is splitted into blocks/chunks/partition/piece.
+
+Users can customize the block size based on the input size file.
+
+HDFS does not support ACID properties.
+
+Internally data is stored in fsimage or fslogs and not really in namenode (namenode just stores the metadata)
+
+Standby namenode is helpful to handle failures occurred in active namenode (disaster recovery)
+
+Limitation - WORM 
+
+((((((((((active namenode, standby namenode, concept of 3 seconds (heartbeat) , only one, SHARDING , v1,v2,v3 ))))))))))))
+
+hdfs stores batch data
+
+
+
+
+									YARN 
+
+Cluster resource manager 
+
+sharding --> file into blocks/chunks/shards 
+
+Creates one application master for each job or task.
+
+YARN contains:
+
+1.Resource manager - located on the master node , keeps track of the resource usage.
+
+2.Node Manager - located in each worker node 
+
+3.Application Master - manages a specific applications job execution 
+
+4.Container - represents a logical unit of work allocated to task in the cluster.
+
+
+								        SQOOOOOOOOP 
+
+
+Purpose --> bulk data transfer from SQL to Hadoop or HDFS or VICE VERSA (using export)
+
+QUES --> Data resides in rdb , structural data analysis for structure analysis (HIVE using SQOOP) and then go for fastest data processing layer (SPARK) and finally create a interactive report (power bi)
+
+Data ingestion from RDB to HIVE or hdfs --> GO WITH SQOOP 
+
+Bulk data import or bulk data loading --> GO WITH SQOOP
+
+For loading specific columns , we can select them externally. 
+
+validating is done using --> --validate (before reading and after reading in hdfs or hive)
+
+
+
+							                SPARKKKKKK
+
+
+VERSION - 3.3.0
+
+Apache Spark is a fast, unified analytics engine for large-scale data processing.
+
+Spark provides a unified platform for various data processing tasks, including batch processing, interactive queries, real-time analytics, machine learning, and graph processing. 
+
+Spark can leverage in-memory processing to significantly speed up data analysis, especially for tasks like machine learning and analytics.
+
+Spark can run on various platforms, including Hadoop, Mesos, Kubernetes, and in the cloud
+
+Polyglot - supports multilanguage  
+
+FURTHER READ FROM EXCEL SHEET
+
+data lineage --> storing all the information of the tasks performed.
+
+SparkSession is used for dataframe. 
+
+Spark is in-memory processing unit where data is splitted into partitions and partitions are pieces of data where collection of partitions is called RDD
+
+SOS file - csv, textfile 
+
+Data is stored in-memory and not in disk.
+
+Spark keeps the data directly in memory and not in secondary storage 
+
+Cluster resource managers in middle - standalone, yarn, Kubernetes, Mesos 
+
+We have two daemons in spark - master and worker 
+
+master - handles all coordination 
+
+worker - each node has multiple executers 
+
+worker node contains - executors  - executers contains tasks 
+
+We can customize the splitting of data 
+
+partitions are each stored in a workers memory 
+
+No. of partitions is equal to the number of tasks which has to be performed.
+
+COMPONENTS 
+
+JOB -
+
+STAGE -
+
+TASK -
+
+DAG -
+
+EXECUTOR -
+
+DRIVER -
+
+MASTER -
+
+SLAVE - the machine on which the executor program runs
+
+
+
+								    RESILIENT DISTRIBUTED DATA 
+
+
+RESILIENT - recoverable / fault tolerant
+
+Dataframe is dynamically typed and dataset is statically typed.
+
+Dataset is type safety.
+
+Dataframe is (schema + data)
+
+COLLECTION OF PARTITION
+
+Characteristic of RDD 
+
+1. Immutable 
+2. Fault tolerance 
+3. Type inferred
+4. Lazy evaluation - morning 5 I loaded the data and later at 5 in the evening I executed it (Whenever an action is performed)
+5. Cacheable
+
+RDD performs two types of operations:
+
+1. Transformations
+We create a new RDD 
+
+2. Action 
+Action only triggers the actual job , no matter at what time we loaded the data, until is called , job won't be executed 
+
+sc.uiWebUrl - isse job monitor tool khulta hai
+
+words - will make a line . of what textfile we gave (MAP - flatmap)
+
+groupwords - it will give each word in key value pair , without the value repeating like ('sid',1) even if sid is there twice in a sentence (SHUFFLE - map to pair)
+
+wordcount - this will count each key , the number of times the value is given ('sid',2) if sid is there twice in the sentence (REDUCE-Reduce by key)
+
+RDD IS COLLECTION OF PARTITIONS 
+
+EVERY RESULT IS GIVEN IN NEW RDD , LIKE WHEN DOING FILTERING (TRANSFORMATIONS) THE NEW OUTPUT DATA IS STORED IN NEW RDD
+
+WHEN THERE IS NO SHUFFLING THEN ITS CALLED NARROW TRANSFORMATION 
+
+REDUCEKEY IS A WIDE TRANSFORMATION BECAUSE HAM YAHAN PE SHUFFLING KAR RAHE HAR PARTITION KI. 
+
+NARROW INCLUDES - filter,flatmap,map
+WIDE INCLUDES - reduce by key,join, rank 
+
+A TEXTFILE IS AN RDD ITSELF 
+
+VVVV IMP - EACH STAGE HAS SOME TASKS , ONE TASK PER PARTITION. FOR EVERY TASK ONE EXECUTOR.
+
+IN SPARK , THERE'S A FILE CALLED "DATA LINEAGE" - IT STORES DATA FROM THE SOURCE TILL THE DESTINATION (MATLAB STARTING OF THE JOB SE LEKE END OF THE JOB TAK)
+
+[ DAG KO KAISE INTERPRET KARNA HAI, YEH SEEKH LENA ]
+
+Everything is an object in spark..
+
+Spark does not have any storage
+
+
+
+
+
+
+
+
+								    IMPORTANT ( FOR MCQ'S ) 
+
+STORAGE ACCOUNT --> BLOB AND ADLS 
+USAGE - BLOB - OBJECT STORE 
+ADLS - data lake, big data
+
+AZURE SQL - Cloud Relational Database 
+
+AZURE VM'S - To create a VM or compute layers 
+
+AZURE DATA FACTORY - Cloud ETL Pipeline design or orchestration tool 
+
+AZURE SYNAPSE - ETL pipeline , coding , power Bi 
+
+AZURE DATABRICKS - runtime on top of spark engine 
+
+COSMOS DB - NoSQL database which support document, columnar, graph and key value 
+
+HDINSIGHT - Hadoop or spark platform 
+
+POWER BI - Data Visualization tool 
+
+AZURE STREAMING ANALYTICS - Realtime streams , (tools - event hub or event grid) , stores and processes data 
+
+VNET - Virtual Network to control our IP's subnet, inbound, outbound, gateway 
+
+ENTRAID / Azure Active Directory - Administration service to create groups, users , policies , roles 
+
+AZURE KEY VAULT - To secure our keys and secrets 
+
+AZURE MONITOR / LOG MONITORING - Monitors the resources like usage, errors/warnings 
+
+IAM (Identity Access Management) - Add rows
+
+ACCESS KEY/SAS TOKEN/SERVICE PRINCIPAL - secure string / (Shared access signature) temporary string that grants limited access to a resource for a specified time and with limited permissions / service principal is for specific roles (RBAC)
+
+RESOURCE GROUP - 
+
+SUBSCRIPTION - 
+
+REGION/AVAILABILITY ZONE - 
+
+LIFT AND SHIFT - on premises to cloud migration is life and shift 
+
+AZURE APP SERVICES - Manage Applications 
+
+AZURE EVENT HUBS - They act like Kafka , ingests streaming data.
+
+AZURE FUNCTIONS - for serverless computing services 
+
+AZURE KUBERNETES SERVICE - cluster manager for containers 
+
+ADLS stores all type of data. 
+
+SYNAPSE SERVERLESS - allows querying directly without loading into DB. 
+
+KEY VAULT stores secrets securely and ADF retrieves them using Managed Identity.
+
+SQL POOL is the one where we don't need to provision anything and scaling is done automatically. 
+
+
+THERE ARE TWO TYPES OF POOL: 
+
+DEDICATED SQL POOL AND SERVERLESS SQL POOL 
+
+--> Serverless doesn't store data and accesses storage data and then does MPP automatically.
+
+--> Static number of servers or nodes in dedicated SQL pool.
+
+
+docker pull - download a docker image from docker registry 
+
+docker run - pulled image to run in local machine to execute the image
+
+docker ps - run all containers 
+
+
+
+
+
+Hadoop interview questions 
+
+hive interview questions 
+
+azure key vault in adf 
+
+pyspark interview questions 
+
+coalescene, rdd, dataframe, higher order functions , types of joins, (sql and python codes (imp))

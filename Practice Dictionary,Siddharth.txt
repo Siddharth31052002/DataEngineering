@@ -1,0 +1,56 @@
+PRACTICING DICTIONARY 
+
+dicti = {'key1':'hi','key2':'hello',key3:98}
+
+len(dicti)
+
+dicti.keys() - saari keys dega list ke form mai 
+
+dicti.values() - saari values dega list ke form mai 
+
+dicti.get(yahan pe key dalegi) - jo key daale uske corresponding value aayegi..
+
+dicti.update({key:value}) - jo key daale, agar woh present hai, toh uski value update karke nayi value daal dega , aur agar key nahi hogi, toh nayi key:value pair add kar dega..
+
+dicti.items() - yeh saare key:value pairs tuple ke form mai de dega..
+
+dicti.pop(koi key) - jo bhi key daali uske corresponding vlue gets removed
+
+dicti.popitems() - the last key value pair gets removed
+
+del dicti[key koi bhi] - Same pop ki Tarah kaam karega,aur woh specified key value pair uda dega.
+
+dicti.clear() - dictionary ko khali kar dega, sirf structure bachega dictionary ka 
+
+
+for x,y in dicti.items():
+     print(x,y) 
+
+saari key:value pairs x and y mai store hoke print hogi..(Important hai)
+
+We can copy a dictionary in 2 ways:
+
+1. dicti2 = copy(dicti)
+
+2. using dict constructor
+
+
+NESTED Dictionary 
+
+dicti['key1']['key2'] - Isme key1 bahar wali dictionary ki koi random key hai aur key2 key1 ki value ke andar ki key hai..
+
+print(objectname.__dict__) --> This will 
+
+private members we can call using public methods within the same class
+
+ 
+
+
+
+
+
+
+
+
+
+
